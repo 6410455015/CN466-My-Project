@@ -21,7 +21,7 @@ WiFiClient wifiClient;
 PubSubClient mqttClient(wifiClient);
 
 // Sound detection settings
-#define SOUND_THRESHOLD 2000000 // Adjust based on environment
+#define SOUND_THRESHOLD 150000 // Adjust based on environment
 #define SAMPLES         128
 #define SAMPLING_FREQUENCY 16000
 
@@ -66,7 +66,7 @@ void setup() {
     connectToWiFi();
     mqttClient.setServer(mqttServer, mqttPort);
     connectToMQTT();
-    hw_mic_init(150000);
+    hw_mic_init(16000);
 }
 
 void loop() {
@@ -114,7 +114,7 @@ void loop() {
         snprintf(message, sizeof(message),
              "{\n"
              "  \"timestamp\": %lu,\n"
-             "  \"status\": Child is Crying\n"
+             "  \"status\": 1 \n"
              "}",
              millis());
 
